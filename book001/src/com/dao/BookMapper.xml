@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dao.BookDao">
+
+	<resultMap type="Category" id="categoryMap">
+		<id property="id" column="cid"/>
+		<result property="name" column="cname"/>
+	</resultMap>
+	<!-- ORM映射 -->
+	<resultMap type="Book" id="bookMap">
+		<id column="bid" property="id"/>
+		<result column="bname" property="name"/>
+		<result column="bauthor" property="author"/>
+		<result column="bpublisher" property="publisher"/>
+		<result column="bpublishDate" property="publishDate"/>
+		<result column="bcid" property="cid"/>
+		<!-- 一对一 映射 -->
+		<association property="category" javaType="Category" resultMap="categoryMap"/>
+	</resultMap>
+	
+	<!-- 增 -->
+	<insert id="saveBook" parameterType="Book">
+		insert into t_book values(null,#{name},#{author},#{publisher},#{publishDate},#{cid})
+	</insert>
+	
+	<!-- 删 -->
+	<delete id="deleteById" parameterType="int">
+		delete from t_book where bid=#{id}
+	</delete>
+	
+	<!-- 查询分页数据 -->
+	<select id="queryByPage" parameterType="map" resultMap="bookMap">
+		select b.*,c.* from t_book b inner join t_category c on b.bcid=c.cid
+		limit #{from},#{pageSize}
+	</select>
+	
+	<!-- 查询t_book表的总数据数 -->
+	<select id="count" resultType="int">
+		select count(1) from t_book
+	</select>
+	
+	<!-- 查询t_category表的所有列数据 -->
+	<select id="queryCategory" resultMap="categoryMap">
+		select * from t_category
+	</select>
+</mapper>

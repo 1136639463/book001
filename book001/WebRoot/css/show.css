@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+table,th,td{
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+
+#tab{
+	position: relative;
+	top: 50px;
+	left: 170px;
+	width: 1200px;
+	
+}
+
+tr{
+	height: 40px;
+	text-align: center;
+	
+}

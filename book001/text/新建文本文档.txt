@@ -1,0 +1,11 @@
+项目版本管理:SVN
+项目构建:Maven
+MVC框架:Springmvc
+IOC容器:Spring
+持久层框架:Mybatis
+数据库:mysql
+分布式负载均衡：nginx
+分布式缓存:redis
+权限框架：shrio
+页面技术:jsp
+
